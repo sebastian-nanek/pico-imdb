@@ -1,3 +1,5 @@
+# require_relative '../services/create_movie_service'
+
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
 
@@ -25,10 +27,10 @@ class MoviesController < ApplicationController
 
   # POST /movies or /movies.json
   def create
-    @movie = Movie.new(movie_params)
+    @movie = CreateMovieService.new(movie_params).call
 
     respond_to do |format|
-      if @movie.save
+      if @movie.persisted?
         format.html { redirect_to movie_url(@movie), notice: "Movie was successfully created." }
         format.json { render :show, status: :created, location: @movie }
       else

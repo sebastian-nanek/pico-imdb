@@ -4,6 +4,9 @@ class Movie < ApplicationRecord
 
   has_many :movie_rates
 
+  validates :title, presence: true, uniqueness: true
+  validates :description, presence: true, length: { minimum: 8 }
+
   def average_rate
     movie_rates.average('rate')
   end
