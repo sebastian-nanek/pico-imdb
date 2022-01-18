@@ -3,7 +3,11 @@ class MoviesController < ApplicationController
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
+    @movies = if index_params.key?(:letter)
+      Movie.where("title like '?%' ", index_params[:letter])
+    else
+      Movie.all
+    end
   end
 
   # GET /movies/1 or /movies/1.json
@@ -66,5 +70,9 @@ class MoviesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def movie_params
       params.require(:movie).permit(:title, :description)
+    end
+
+    def index_params
+      params.permit(:letter)
     end
 end

@@ -1,12 +1,22 @@
 <div id="<%= dom_id movie %>">
-  <p>
-    <strong>Title:</strong>
-    <%= movie.title %>
-  </p>
+  <h3>
+    <%= link_to movie.title, movie %>
+  </h3>
 
   <p>
     <strong>Description:</strong>
     <%= movie.description %>
   </p>
 
+  <p>
+    <strong>Rate:</strong>
+    <%= movie.average_rate %>
+  </p>
+
+  <p>
+    <strong>Actors include:</strong>
+    <%= movie.actor_names %>
+  </p>
+
 </div>
+<br><hr><br>
